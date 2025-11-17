@@ -72,10 +72,10 @@ pub fn say_hello(mut name: String) -> Result<TcpStream, StreamError> {
                                 clear_terminal();
 
                                 // print the message sent by the server
-                                println!("{}", s);
+                                println!("{s}");
                             }
                             Err(e) => {
-                                println!("Failed to receive data: {}", e);
+                                println!("Failed to receive data: {e}");
                             }
                         }
                         break;
@@ -84,10 +84,10 @@ pub fn say_hello(mut name: String) -> Result<TcpStream, StreamError> {
                         match get_str_from_server(&mut stream) {
                             Ok(s) => { 
                                 // print the message sent by the server
-                                println!("{}", s);
+                                println!("{s}");
                             }
                             Err(e) => {
-                                println!("Failed to receive data: {}", e);
+                                println!("Failed to receive data: {e}");
                             }
                         }
                         break;
@@ -104,7 +104,7 @@ pub fn say_hello(mut name: String) -> Result<TcpStream, StreamError> {
     }
 }
 
-/// get a request from te server and act accordingly
+/// get a request from the server and act accordingly
 ///
 /// The request is initially encoded in a single byte sent by the server to `stream`. 
 /// Five values are currently supported: 
@@ -275,7 +275,7 @@ impl std::fmt::Display for StreamError {
 
 impl std::convert::From<std::io::Error> for StreamError {
     fn from(error: std::io::Error) -> Self {
-        StreamError { message: format!("IO Error: {}", error) }
+        StreamError { message: format!("IO Error: {error}") }
     }
 }
 

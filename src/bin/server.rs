@@ -224,11 +224,11 @@ fn main() {
     {
 
         // set-up the tcp listener
-        let listener = TcpListener::bind(format!("0.0.0.0:{}", port)).unwrap();
+        let listener = TcpListener::bind(format!("0.0.0.0:{port}")).unwrap();
         
         // accept connections and process them, each in its own thread
         let names_taken = Arc::new(Mutex::new(Vec::<String>::new())); // vector of the names that are already taken
-        println!("\nserver listening to port {}", port);
+        println!("\nserver listening to port {port}");
         for stream_res in listener.incoming() {
             match stream_res {
                 Ok(stream) => {
@@ -245,7 +245,7 @@ fn main() {
                     }
                 },
                 Err(e) => {
-                    println!("Error: {}", e);
+                    println!("Error: {e}");
                 }
             }
 
@@ -259,7 +259,7 @@ fn main() {
         if load {
 
             for _i in 0..config.n_players {
-                client_streams.push(TcpStream::connect(format!("0.0.0.0:{}", port)).unwrap());
+                client_streams.push(TcpStream::connect(format!("0.0.0.0:{port}")).unwrap());
             }
             for thread in client_threads {
                 let output = thread.join().unwrap();
@@ -370,7 +370,7 @@ fn main() {
             {
                 Ok(o_m) => previous_messages[player] = o_m.clone(),
                 Err(err) => {
-                    println!("{}", err);
+                    println!("{err}");
                     process::exit(1);
                 }
             };
@@ -443,7 +443,7 @@ fn main() {
     for (i,cs) in client_streams.iter_mut().enumerate() {
         match cs.write_all(&[5]) {
             Ok(_) => {},
-            Err(_) => println!("Could not send the exit signal to client {}", i)
+            Err(_) => println!("Could not send the exit signal to client {i}")
         };
     }
 

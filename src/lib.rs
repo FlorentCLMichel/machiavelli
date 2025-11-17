@@ -331,7 +331,7 @@ pub fn player_turn(table: &mut Table, hand: &mut Sequence, deck: &mut Sequence,
         // clear the terminal
         clear_terminal();
         
-        println!("\x1b[1m{}'s turn", player_name);
+        println!("\x1b[1m{player_name}'s turn");
         reset_style();
         
         print_situation(table, hand, deck);
@@ -340,7 +340,7 @@ pub fn player_turn(table: &mut Table, hand: &mut Sequence, deck: &mut Sequence,
         println!("{}", &instructions());
         
         if message.is_empty() {
-            println!("\n{}", message);
+            println!("\n{message}");
             message.clear()
         }
         
@@ -413,10 +413,10 @@ fn print_situation(table: &Table, hand: &Sequence, deck: &Sequence) {
     println!("\n{} cards remaining in the deck", deck.number_cards());
     
     // print the table
-    println!("Table: \n{}", table);
+    println!("Table: \n{table}");
 
     // print the player hand
-    println!("Your hand:\n{}\n", hand);
+    println!("Your hand:\n{hand}\n");
     reset_style();
 
 }

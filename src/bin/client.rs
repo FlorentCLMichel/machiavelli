@@ -49,7 +49,7 @@ fn connect(name: &str) -> TcpStream {
     match say_hello(name.to_string()) {
         Ok(s) => s,
         Err(e) => {
-            println!("Failed to connect: {}", e);
+            println!("Failed to connect: {e}");
             exit(1);
         }
     }

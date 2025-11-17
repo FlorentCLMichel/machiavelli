@@ -1,3 +1,5 @@
+.PHONY: server client clippy debug test run release doc open_doc clean
+
 server: release
 	./target/release/server
 
@@ -26,4 +28,4 @@ open_doc: doc
 	xdg-open ./target/doc/machiavelli/index.html
 
 clean: 
-	trash target; trash Cargo.lock; trash *.sav
+	rm -rf target; rm -f Cargo.lock; rm -f *.sav
