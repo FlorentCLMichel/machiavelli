@@ -67,7 +67,7 @@ pub fn handle_client(mut stream: TcpStream) -> Result<(TcpStream, String, usize)
         Ok(s) => {
             // great the player
             player_name = s.clone();
-            let msg = format!("Hello {}!\nWaiting for other players to join...", &s);
+            let msg = format!("Hello {s}!\nWaiting for other players to join...");
             stream.write_all(&[1])?;
             send_str_to_client(&mut stream, &msg)?;
         },
@@ -105,7 +105,7 @@ pub fn handle_client_load(mut stream: TcpStream, names: &[String], names_taken: 
                             None => {
                                 position = i;
                                 stream.write_all(&[1])?;
-                                let msg = format!("Hello {}!\nWaiting for other players to join...", &s);
+                                let msg = format!("Hello {s}!\nWaiting for other players to join...");
                                 send_str_to_client(&mut stream, &msg)?;
                                 lock.push(player_name.clone());
                                 break;
@@ -114,7 +114,7 @@ pub fn handle_client_load(mut stream: TcpStream, names: &[String], names_taken: 
                     },
                     None => {
                         stream.write_all(&[0])?;
-                        let msg = format!("Sorry, {} is not in the list of players!\n", &s);
+                        let msg = format!("Sorry, {s} is not in the list of players!\n");
                         send_str_to_client(&mut stream, &msg)?;
                     }
                 }
@@ -138,7 +138,7 @@ pub fn wait_for_reconnection(stream: &mut TcpStream, name: &str, port: usize)
     // wait for a connection
 
     // set-up the tcp listener
-    let listener = TcpListener::bind(format!("0.0.0.0:{}", port))?;
+    let listener = TcpListener::bind(format!("0.0.0.0:{port}"))?;
 
     // get connections and check the player is the right one
     for mut new_stream in listener.incoming().flatten() {
@@ -531,7 +531,7 @@ fn add_to_table_sequence_remote(table: &mut Table, hand: &mut Sequence,
                     seq_from_table = seq;
                 },
                 None => {
-                    let message = format!("Sequence {} is not on the table\n", n);
+                    let message = format!("Sequence {n} is not on the table\n");
                     return Ok(Some(message))
                 }
             },
@@ -825,7 +825,7 @@ impl std::fmt::Display for StreamError {
 
 impl std::convert::From<std::io::Error> for StreamError {
     fn from(error: std::io::Error) -> Self {
-        StreamError { message: format!("IO Error: {}", error) }
+        StreamError { message: format!("IO Error: {error}") }
     }
 }
 

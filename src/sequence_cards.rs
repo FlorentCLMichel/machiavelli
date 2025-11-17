@@ -75,7 +75,7 @@ impl fmt::Display for Card {
                     12 => "Q".to_string(),
                     13 => "K".to_string(),
                     10 => "10".to_string(),
-                    _ => format!("{}", val)
+                    _ => format!("{val}")
                 };
                 let char_suit = match suit {
                     Heart => '♥',
@@ -89,7 +89,7 @@ impl fmt::Display for Card {
                     Club => "30",
                     Spade => "30",
                 };
-                write!(f, "\x1b[1;{}m{}{}", color, str_val, char_suit)
+                write!(f, "\x1b[1;{color}m{str_val}{char_suit}")
             },
             Joker => write!(f, "\x1b[1;34m#")
         }
@@ -266,7 +266,7 @@ impl Sequence {
             
             // print the current card with a space
             let current_card = &self.0[i-1];
-            first_line.push_str(&format!("{} ", current_card));
+            first_line.push_str(&format!("{current_card} "));
             
             // see how many characters the current caerd take
             match current_card {
@@ -276,7 +276,7 @@ impl Sequence {
             };
 
             // print the index
-            second_line.push_str(&format!("{} ", i));
+            second_line.push_str(&format!("{i} "));
 
             // pad the first line with spaces if necessary
             for _ in n_chars_1..n_chars_2 {
@@ -343,7 +343,7 @@ impl Sequence {
             
             // print the current card with a space
             let current_card = &self.0[i-n-1];
-            first_line.push_str(&format!("{} ", current_card));
+            first_line.push_str(&format!("{current_card} "));
             
             // see how many characters the current card takes
             match current_card {
@@ -353,7 +353,7 @@ impl Sequence {
             };
 
             // print the index
-            second_line.push_str(&format!("{} ", i));
+            second_line.push_str(&format!("{i} "));
 
             // pad the first line with spaces if necessary
             for _ in n_chars_1..n_chars_2 {
@@ -1395,7 +1395,7 @@ mod tests {
             RegularCard(Diamond, 3), 
             RegularCard(Heart, 2), 
         ]);
-        assert_eq!("\u{1b}[1;30m2♣ \u{1b}[1;34m# \u{1b}[1;31m3♦ \u{1b}[1;31m2♥ ".to_string(), format!("{}", &seq));
+        assert_eq!("\u{1b}[1;30m2♣ \u{1b}[1;34m# \u{1b}[1;31m3♦ \u{1b}[1;31m2♥ ".to_string(), format!("{seq}"));
     }
 
     #[test]
