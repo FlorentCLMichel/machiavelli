@@ -5,7 +5,7 @@
 use std::process;
 use std::io::{ stdin, Read, Write };
 use std::fs::File;
-use rand::thread_rng;
+use rand::rng;
 use machiavelli::*;
 
 fn main() {
@@ -100,7 +100,7 @@ fn main() {
     } else {
 
         // build the deck
-        let mut rng = thread_rng();
+        let mut rng = rng();
         deck = Sequence::multi_deck(config.n_decks, config.n_jokers, &mut rng);
         
         // build the hands

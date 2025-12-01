@@ -194,7 +194,7 @@ pub fn send_bytes_to_server(stream: &mut TcpStream, bytes: &[u8]) -> Result<(), 
 
     // the first bytes will determine the number of times the buffer should be read
     let mut n_buffers: u8 = (bytes.len() / BUFFER_SIZE) as u8;
-    if bytes.len() % BUFFER_SIZE != 0 {
+    if !bytes.len().is_multiple_of(BUFFER_SIZE) {
         n_buffers += 1;
     }
     stream.write_all(&[n_buffers])?;
