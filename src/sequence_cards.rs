@@ -511,10 +511,10 @@ impl Sequence {
     /// # Example
     ///
     /// ```
-    /// use rand::thread_rng;
+    /// use rand::rng;
     /// use machiavelli::sequence_cards::Sequence;
     ///
-    /// let mut rng = thread_rng();
+    /// let mut rng = rng();
     /// let sequence = Sequence::multi_deck(3, 6, &mut rng);
     ///
     /// assert_eq!(162, sequence.number_cards());
@@ -912,7 +912,7 @@ mod tests {
 
     use super::*;
     use Card::{ RegularCard, Joker };
-    use rand::thread_rng;
+    use rand::rng;
 
     #[test]
     fn take_jokers_1() {
@@ -1368,21 +1368,21 @@ mod tests {
 
     #[test]
     fn build_deck_1() {
-        let mut rng = thread_rng();
+        let mut rng = rng();
         let deck = Sequence::multi_deck(1, 0, &mut rng);
         assert_eq!(52, deck.number_cards());
     }
     
     #[test]
     fn build_deck_2() {
-        let mut rng = thread_rng();
+        let mut rng = rng();
         let deck = Sequence::multi_deck(2, 4, &mut rng);
         assert_eq!(108, deck.number_cards());
     }
     
     #[test]
     fn build_deck_3() {
-        let mut rng = thread_rng();
+        let mut rng = rng();
         let deck = Sequence::multi_deck(3, 1, &mut rng);
         assert_eq!(157, deck.number_cards());
     }
